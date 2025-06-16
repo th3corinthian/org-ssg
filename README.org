@@ -1,0 +1,5 @@
+#+TITLE: org-ssg
+#+AUTHOR: Corinthian
+#+DESCRIPTION: a cli static site generator for org-mode files
+
+[[file:assets/cover.jpg]]
