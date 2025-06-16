@@ -3,7 +3,8 @@
 #+DESCRIPTION: a cli static site generator for org-mode files
 
 [[file:assets/cover.jpg]]
-
 #+BEGIN_QUOTE
-"No matter where you are, everyone is always connected" - Lain Iwakura
+"No matter where you are, everyone's connected" - Lain Iwakura
 #+END_QUOTE
+
+*org-ssg* is a command-line static site generator written in Go that transforms your Org-mode (.org) documents into a fully structured HTML website. Simply generate a new project, add your chosen Org files and templates, and *org-ssg* will parse each document into HTML pages, apply your chosen layout, copy over static assets, and generate navigational links—all in a single build step. Designed for speed and simplicity, it lets you author content in Emacs’ familiar Org syntax and produce a ready-to-deploy site with minimal configuration.
