@@ -3,3 +3,7 @@
 #+DESCRIPTION: a cli static site generator for org-mode files
 
 [[file:assets/cover.jpg]]
+
+#+BEGIN_QUOTE
+"No matter where you are, everyone is always connected" - Lain Iwakura
+#+END_QUOTE
