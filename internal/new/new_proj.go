@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"log"
+	"path/filepath"
 
 	"gopkg.in/yaml.v3"
 )
@@ -16,16 +17,38 @@ type Config struct {
 	Template	string	`yaml:"template"`
 }
 
-func NewProj(projName string) {
-	err := os.Mkdir(projName, 0755)
-	if err != nil {
-		log.Fatal(err)
-		return
+func NewProj(projectRoot string) error {
+	if err := genDir(projectRoot); err != nil {
+		return err
 	}
-	dirPath := projName
-	fmt.Println("[+] Directory created:", dirPath)
+	if err := genSubDir(projectRoot); err != nil {
+		return err
+	}
+	return nil
 }
 
+func genDir(path string) error {
+	if err := os.Mkdir(path, 0755); err != nil {
+		return err
+	}
+	fmt.Println("[+] Directory created:", path)
+	return nil
+}
+
+func genSubDir(base string) error {
+	subdir := []string{
+		"_layouts", "_posts", "_site", "css",
+	}
+
+	for _, d := range subdir {
+		fullPath := filepath.Join(base, d)
+		if err := os.MkdirAll(fullPath, 0755); err != nil {
+			return err
+		}
+	}; return nil
+}
+
+// below is to generate and populate "config.yml"
 func GenConfig(dirPath string) {
 	// generating config.yml
 	configPath := dirPath + "/config.yml"
