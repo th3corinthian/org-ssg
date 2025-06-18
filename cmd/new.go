@@ -14,6 +14,7 @@ var newCmd = &cobra.Command{
 	Use:   "new [project_name]",
 	Short: "Generate a new project directory",
 	Long: `Input desired name for project, 'new' will auto generate your workspace`,
+	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		path := args[0]
 		new.NewProj(path)
