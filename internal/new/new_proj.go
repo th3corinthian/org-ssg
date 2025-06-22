@@ -10,11 +10,28 @@ import (
 )
 
 type Config struct {
-	Server		string	`yaml:"server"`
-	Port		int		`yaml:"port"`
-	UseTLS		bool	`yaml:"use_tls"`
-	Username	string	`yaml:"username"`
-	Template	string	`yaml:"template"`
+	Server		Server		`yaml:"server"`
+	Site		Site		`yaml:"site"`
+	Paths		Paths		`yaml:"paths"`
+}
+
+type Site struct {
+	Title		string		`yaml:"title"`
+	Description	string		`yaml:"description"`
+	Author		string		`yaml:author`
+}
+
+type Server struct {
+	Host		string		`yaml:"host"`
+	Port		int 		`yaml:"port"`
+	UseTLS		bool 		`yaml:"use_tls"`
+}
+
+type Paths struct {
+	Input		string		`yaml:"input"`
+	Output		string		`yaml:"output"`
+	Assets		string		`yaml:"assets"`
+	Templates	string		`yaml:"templates"`
 }
 
 func NewProj(projectRoot string) error {
@@ -69,10 +86,22 @@ func GenConfig(dirPath string) {
 
 func genYAMLConfig() (string) {
 	config := Config{
-		Server:		"localhost",
-		Port:		8080,
-		UseTLS:		true,
-		Username:	"admin",
+		Server: Server{
+			Host:			"localhost",
+			Port:			8080,
+			UseTLS:			true,
+		},
+		Site: Site{
+			Title:			"My Website",
+			Description:	"A description of my website",
+			Author:			"John Doe",
+		},
+		Paths: Paths{
+			Input:			"/path/to/input",
+			Output:			"/path/to/output",
+			Assets:			"/path/to/assets",
+			Templates:		"/path/to/templates",
+		},
 	}
 
 	yamlData, err := yaml.Marshal(config)
