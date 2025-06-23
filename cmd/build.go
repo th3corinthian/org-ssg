@@ -18,6 +18,7 @@ var buildCmd = &cobra.Command{
 	Long: `generates HTML files from specified org-mode files`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("build called")
+		build.ConfigServer()
 	},
 }
 

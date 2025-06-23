@@ -1,7 +1,6 @@
 package build
 
 import (
-	"io/ioutil"
 	"net/http"
 	"log"
 	"fmt"
@@ -24,7 +23,7 @@ type Config struct {
 }
 
 func loadConfig(filepath string) (*Config, error) {
-	data, err := ioutil.Readfile(filepath)
+	data, err := os.ReadFile(filepath)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +36,7 @@ func loadConfig(filepath string) (*Config, error) {
 	return &cfg, nil
 }
 
-func configServer() {
+func ConfigServer() {
 	cfg, err := loadConfig("myproj/config.yml")
 	if err != nil {
 		log.Fatalf("[-] Error loading config: %v", err)
