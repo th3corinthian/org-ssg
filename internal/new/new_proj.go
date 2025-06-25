@@ -6,33 +6,9 @@ import (
 	"log"
 	"path/filepath"
 
+	"github.com/th3corinthian/org-ssg/internal/models"
 	"gopkg.in/yaml.v3"
 )
-
-type Config struct {
-	Server		Server		`yaml:"server"`
-	Site		Site		`yaml:"site"`
-	Paths		Paths		`yaml:"paths"`
-}
-
-type Site struct {
-	Title		string		`yaml:"title"`
-	Description	string		`yaml:"description"`
-	Author		string		`yaml:author`
-}
-
-type Server struct {
-	Host		string		`yaml:"host"`
-	Port		int 		`yaml:"port"`
-	UseTLS		bool 		`yaml:"use_tls"`
-}
-
-type Paths struct {
-	Input		string		`yaml:"input"`
-	Output		string		`yaml:"output"`
-	Assets		string		`yaml:"assets"`
-	Templates	string		`yaml:"templates"`
-}
 
 func NewProj(projectRoot string) error {
 	if err := genDir(projectRoot); err != nil {
@@ -85,18 +61,18 @@ func GenConfig(dirPath string) {
 }
 
 func genYAMLConfig() (string) {
-	config := Config{
-		Server: Server{
+	config := models.Config{
+		Server: models.Server {
 			Host:			"localhost",
 			Port:			8080,
 			UseTLS:			true,
 		},
-		Site: Site{
+		Site: models.Site {
 			Title:			"My Website",
 			Description:	"A description of my website",
 			Author:			"John Doe",
 		},
-		Paths: Paths{
+		Paths: models.Paths {
 			Input:			"/path/to/input",
 			Output:			"/path/to/output",
 			Assets:			"/path/to/assets",
