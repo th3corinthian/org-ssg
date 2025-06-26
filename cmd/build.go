@@ -16,9 +16,11 @@ var buildCmd = &cobra.Command{
 	Use:   "build",
 	Short: "build and generate the files needed to deploy",
 	Long: `generates HTML files from specified org-mode files`,
+	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
+		path := args[0]
 		fmt.Println("build called")
-		build.StartServer()
+		build.StartServer(path)
 	},
 }
 

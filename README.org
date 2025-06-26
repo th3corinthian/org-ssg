@@ -8,3 +8,9 @@
 #+END_QUOTE
 
 *org-ssg* is a command-line static site generator written in Go that transforms your Org-mode (.org) documents into a fully structured HTML website. Simply generate a new project, add your chosen Org files and templates, and *org-ssg* will parse each document into HTML pages, apply your chosen layout, copy over static assets, and generate navigational links—all in a single build step. Designed for speed and simplicity, it lets you author content in Emacs’ familiar Org syntax and produce a ready-to-deploy site with minimal configuration.
+
+To generate a new project directory simply:
+#+BEGIN_SRC bash
+org-ssg new [project name]
+#+END_SRC
+Which will generate a new project directory, a base *config.yml* file, and the subdirectories *_layouts*, *_posts*, *_site*, and *css*.

@@ -2,6 +2,7 @@ package server
 
 import (
 	"net/http"
+	"crypto/tls"
 	"log"
 	"fmt"
 
@@ -22,9 +23,10 @@ func Start(cfg *models.Config) error {
 
 	var err error
 	if cfg.Server.UseTLS {
+		srv.startTLS()
 		err = srv.ListenAndServeTLS("cert.pem", "key.pem")
 	} else {
-		err = srv.ListenAndServe()
+		err = startTLS()
 	}
 	if err != http.ErrServerClosed {
 		return err
@@ -32,6 +34,22 @@ func Start(cfg *models.Config) error {
 	return nil
 }
 
+func startTLS() {
+	cert, err := tls.LoadX509KeyPair("server.crt", "server.key")
+	if err != nil {
+		log.Fatalf("Failed to load X509 key pair: %v", err)
+	}
+
+	config := &tls.Config{
+		Certificates: []tls.Certificate{cert},
+	}
+
+	server := &http.Server{
+		TLSConfig: config,
+	}
+
+	err = server.ListenAndServeTLS("","")
+}
 
 //func HelloServer(w http.ResponseWriter, req *http.Request) {
 //	w.Header().Set("Content-Type", "text/plain")

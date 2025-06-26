@@ -31,8 +31,8 @@ func loadConfig(filepath string) (*models.Config, error) {
 //	}
 //}
 
-func StartServer() {
-	cfg, err := loadConfig("myproj/config.yml")
+func StartServer(projName string) {
+	cfg, err := loadConfig(projName + "/config.yml")
 	if err != nil {
 		log.Fatal("[-] Error loading config: %v\n", err)
 	}
